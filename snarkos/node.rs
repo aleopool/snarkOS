@@ -23,6 +23,7 @@ use snarkvm::prelude::Network;
 use anyhow::{bail, Result};
 use core::marker::PhantomData;
 use std::{net::SocketAddr, sync::Arc};
+use tracing_subscriber::fmt::format::debug_fn;
 
 #[derive(Clone)]
 pub struct Node<N: Network, E: Environment> {
@@ -40,6 +41,7 @@ impl<N: Network, E: Environment> Node<N, E> {
 
         // If the node is not in development mode, perform fast sync with the network.
         if cli.dev.is_none() {
+            debug!("dev is none");
             // Sync the ledger with the network.
             ledger.initial_sync_with_network(&cli.beacon_addr.ip()).await?;
         }

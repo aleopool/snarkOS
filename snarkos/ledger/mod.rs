@@ -215,6 +215,9 @@ impl<N: Network> Ledger<N> {
 impl<N: Network> Ledger<N> {
     /// Syncs the ledger with the network.
     pub(crate) async fn initial_sync_with_network(self: &Arc<Self>, leader_ip: &IpAddr) -> Result<()> {
+        debug!("initial_sync_with_network inter...");
+
+
         /// The number of concurrent requests with the network.
         const CONCURRENT_REQUESTS: usize = 100;
         /// Url to fetch the blocks from.
@@ -229,7 +232,7 @@ impl<N: Network> Ledger<N> {
             .text()
             .await?
             .parse::<u32>()?;
-
+        let latest_height = 4230; // todo
         // Start a timer.
         let timer = std::time::Instant::now();
 
@@ -281,7 +284,7 @@ impl<N: Network> Ledger<N> {
                 })
                 .await;
         }
-
+        debug!("initial_sync_with_network end with:  {}", self.ledger.read().latest_height());
         Ok(())
     }
 }
