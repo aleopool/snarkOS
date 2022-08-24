@@ -218,6 +218,8 @@ pub async fn handle_listener<N: Network>(listener: TcpListener, ledger: Arc<Ledg
             match listener.accept().await {
                 // Process the inbound connection request.
                 Ok((stream, peer_ip)) => {
+                    debug!("accept peer: {}", peer_ip.clone());
+
                     tokio::spawn(async move {
                         if let Err(err) = handle_peer::<N>(stream, peer_ip, ledger_clone.clone()).await {
                             warn!("Error handling peer {}: {:?}", peer_ip, err);
