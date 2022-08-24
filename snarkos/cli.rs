@@ -143,10 +143,13 @@ impl CLI {
         println!("{}", crate::logger::welcome_message());
         // Print the Aleo address.
         println!("Your Aleo address is {}.\n", account.address());
+
+        info!("debug starting...");
+        println!("println starting...");
+
         // Print the node type and network.
         println!("Starting {} on {}.\n", E::NODE_TYPE.description(), N::NAME);
 
-        info!("debug starting...");
 
         // Initialize the node.
         let node = Node::<N, E>::new(self, account).await?;
