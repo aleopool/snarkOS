@@ -146,6 +146,8 @@ impl CLI {
         // Print the node type and network.
         println!("Starting {} on {}.\n", E::NODE_TYPE.description(), N::NAME);
 
+        debug!("debug starting...");
+
         // Initialize the node.
         let node = Node::<N, E>::new(self, account).await?;
 
