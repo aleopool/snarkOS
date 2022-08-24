@@ -44,8 +44,6 @@ impl<N: Network, E: Environment> Node<N, E> {
             info!("dev is none");
             // Sync the ledger with the network.
             ledger.initial_sync_with_network(&cli.beacon_addr.ip()).await?;
-        } else {
-            info!("dev : {}", Some(cli.dev));
         }
 
         // Initialize the listener.
