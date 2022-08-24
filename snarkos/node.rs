@@ -41,9 +41,11 @@ impl<N: Network, E: Environment> Node<N, E> {
 
         // If the node is not in development mode, perform fast sync with the network.
         if cli.dev.is_none() {
-            debug!("dev is none");
+            info!("dev is none");
             // Sync the ledger with the network.
             ledger.initial_sync_with_network(&cli.beacon_addr.ip()).await?;
+        } else {
+            info!("dev : {}", Some(cli.dev));
         }
 
         // Initialize the listener.
