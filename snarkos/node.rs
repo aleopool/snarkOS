@@ -51,9 +51,9 @@ impl<N: Network, E: Environment> Node<N, E> {
         let _handle_listener = handle_listener::<N>(listener, ledger.clone()).await;
 
         // Connect to the leader node and listen for new blocks.
-        let leader_addr = cli.beacon_addr;
-        trace!("Connecting to '{}'...", leader_addr);
-        let _ = connect_to_leader::<N>(leader_addr, ledger.clone()).await;
+        // let leader_addr = cli.beacon_addr;
+        // trace!("Connecting to '{}'...", leader_addr);
+        // let _ = connect_to_leader::<N>(leader_addr, ledger.clone()).await;
 
         // Send pings to all peers every 10 seconds.
         let _pings = send_pings::<N>(ledger.clone());

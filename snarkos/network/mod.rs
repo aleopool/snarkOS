@@ -242,6 +242,7 @@ pub fn send_pings<N: Network>(ledger: Arc<Ledger<N>>) -> Result<(), Box<dyn std:
             let peers = ledger.peers().read().clone();
 
             for (addr, outbound) in peers.iter() {
+                debug!("send_pings addr {}", addr);
                 if let Err(err) = outbound.try_send(Message::<N>::Ping) {
                     warn!("Error sending ping {} to {}", err, addr);
                 }
