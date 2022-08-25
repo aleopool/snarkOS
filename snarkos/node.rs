@@ -40,11 +40,11 @@ impl<N: Network, E: Environment> Node<N, E> {
         let ledger = Ledger::<N>::load(account.private_key()).await?;
 
         // If the node is not in development mode, perform fast sync with the network.
-        //if cli.dev.is_none() {
-          //  info!("dev is none");
+        if cli.dev.is_none() {
+            info!("dev is none");
             // Sync the ledger with the network.
-            // ledger.initial_sync_with_network(&cli.beacon_addr.ip()).await?;
-        //}
+            ledger.initial_sync_with_network(&cli.beacon_addr.ip()).await?;
+        }
 
         // Initialize the listener.
         let listener = tokio::net::TcpListener::bind(cli.node).await?;
